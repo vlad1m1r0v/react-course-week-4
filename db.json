@@ -201,6 +201,22 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
+    },
+    {
+      "dishId": 0,
+      "rating": 5,
+      "author": "Vladimirov A.",
+      "comment": "I liked it",
+      "date": "2022-05-21T14:08:49.192Z",
+      "id": 20
+    },
+    {
+      "dishId": 0,
+      "rating": 4,
+      "author": "John Cena",
+      "comment": "Okay",
+      "date": "2022-05-21T14:09:28.486Z",
+      "id": 21
     }
   ],
   "promotions": [
@@ -263,6 +279,28 @@
       "message": "cool",
       "date": "2017-12-04T09:41:49.890Z",
       "id": 1
+    },
+    {
+      "firstname": "Artem",
+      "lastname": "Vladimirov",
+      "telnum": "0956049867",
+      "email": "mypochtav@gmail.com",
+      "agree": true,
+      "contactType": "Email",
+      "message": "pen pineapple apple pen",
+      "date": "2022-05-21T13:43:44.100Z",
+      "id": 2
+    },
+    {
+      "firstname": "Artem",
+      "lastname": "Vladimirov",
+      "telnum": "0956049867",
+      "email": "mypochtav@gmail.com",
+      "agree": true,
+      "contactType": "Email",
+      "message": "pen pineapple apple pen",
+      "date": "2022-05-21T13:45:15.525Z",
+      "id": 3
     }
   ]
 }

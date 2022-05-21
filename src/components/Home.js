@@ -1,6 +1,7 @@
 import { Card } from "react-bootstrap";
 import { Loading } from "./Loading";
 import { baseUrl } from "../shared/baseUrl";
+import { motion } from "framer-motion";
 
 function RenderCard({ item, isLoading, errMess }) {
   if (isLoading) {
@@ -37,7 +38,12 @@ export default function Home({
   leadersErrMess,
 }) {
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
+    >
       <div className="row align-items-start">
         <div className="col-12 col-md m-1">
           <RenderCard
@@ -61,6 +67,6 @@ export default function Home({
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

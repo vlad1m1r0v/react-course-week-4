@@ -2,6 +2,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./Loading";
 import { baseUrl } from "../shared/baseUrl";
+import { motion } from "framer-motion";
 
 function RenderMenuItem({ dish }) {
   return (
@@ -44,8 +45,13 @@ export default function Menu({ dishes }) {
   }
 
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
+    >
       <div className="row">{menu}</div>
-    </div>
+    </motion.div>
   );
 }

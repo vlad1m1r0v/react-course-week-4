@@ -1,32 +1,54 @@
 import { Breadcrumb, BreadcrumbItem, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Loading } from "./Loading";
+import { baseUrl } from "../shared/baseUrl";
+import { motion } from "framer-motion";
 
-export default function About(props) {
+export default function About({ leaders }) {
   function RenderLeader({ leader }) {
     return (
-      <>
-        <div className="m-4">
-          <div className="d-flex">
-            <div className="flex-shrink-0">
-              <img src={leader.image} alt={leader.name} />
-            </div>
-            <div className="flex-grow-1 ms-3">
-              <h5>{leader.name}</h5>
-              <h6>{leader.designation}</h6>
-              <p>{leader.description}</p>
-            </div>
+      <div className="m-4">
+        <div className="d-flex">
+          <div className="flex-shrink-0">
+            <img src={baseUrl + leader.image} alt={leader.name} />
+          </div>
+          <div className="flex-grow-1 ms-3">
+            <h5>{leader.name}</h5>
+            <h6>{leader.designation}</h6>
+            <p>{leader.description}</p>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
-  const leaders = props.leaders.map((leader) => (
-    <RenderLeader leader={leader} />
-  ));
+  function RenderContent({ leaders, isLoading, errMess }) {
+    if (isLoading) {
+      return <Loading />;
+    }
+
+    if (errMess) {
+      return <h4>{errMess}</h4>;
+    }
+
+    return leaders.map((leader, index) => (
+      <motion.div
+        initial={{ opacity: 0, position: "absolute" }}
+        animate={{ opacity: 1, position: "static" }}
+        transition={{ duration: 0.3, delay: 0.3 * index }}
+      >
+        <RenderLeader leader={leader} />
+      </motion.div>
+    ));
+  }
 
   return (
-    <div className="container">
+    <motion.div
+      className="container"
+      initial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
+    >
       <div className="row">
         <Breadcrumb>
           <BreadcrumbItem>
@@ -101,9 +123,15 @@ export default function About(props) {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <div className="row">{leaders}</div>
+          <div className="row">
+            <RenderContent
+              leaders={leaders.leaders}
+              isLoading={leaders.isLoading}
+              errMess={leaders.errMess}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

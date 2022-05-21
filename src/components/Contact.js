@@ -9,8 +9,12 @@ import {
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { object, string, number, bool } from "yup";
+import { useDispatch } from "react-redux";
+import { addFeedback } from "../redux/ActionCreators";
 
 export default function Contact() {
+  const dispatch = useDispatch();
+
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -39,7 +43,8 @@ export default function Contact() {
 
   const onSubmit = (values) => {
     console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    // alert("Current State is: " + JSON.stringify(values));
+    dispatch(addFeedback(values));
   };
 
   const formik = useFormik({

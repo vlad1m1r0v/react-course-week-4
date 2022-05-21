@@ -82,6 +82,7 @@ const addFeedback = createAsyncThunk(
         return rejectWithValue(response.status);
       }
       const data = await response.json();
+      alert(JSON.stringify(data));
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error.response?.data ?? error);

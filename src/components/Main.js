@@ -6,7 +6,7 @@ import Contact from "./Contact";
 import Home from "./Home";
 import About from "./About";
 import { useParams } from "react-router-dom";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import {
@@ -15,9 +15,11 @@ import {
   loadPromos,
   loadLeaders,
 } from "../redux/ActionCreators";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { AnimatePresence } from "framer-motion";
 
 export default function Main() {
+  const location = useLocation();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,14 +68,16 @@ export default function Main() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route exact path="/home" element={<HomePage />} />
-        <Route exact path="/menu" element={<Menu dishes={dishes} />} />
-        {/* <Route exact path="/contactus" element={<Contact />} />
-        <Route exact path="/menu/:dishId" element={<DishWithId />} />
-        <Route exact path="/aboutus" element={<About leaders={leaders} />} /> */}
-        <Route path="*" element={<Navigate to="/home" replace />} />
-      </Routes>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route exact path="/home" element={<HomePage />} />
+          <Route exact path="/menu" element={<Menu dishes={dishes} />} />
+          <Route exact path="/contactus" element={<Contact />} />
+          <Route exact path="/menu/:dishId" element={<DishWithId />} />
+          <Route exact path="/aboutus" element={<About leaders={leaders} />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
+        </Routes>
+      </AnimatePresence>
       <Footer />
     </>
   );
